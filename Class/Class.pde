@@ -7,6 +7,8 @@ class Ball
   int nombreAleatoirey = 1 + (int)(Math.random() * ((20 - 1) + 1));
   int sens = 1;
   int sensx = 1;
+  int Changement = 0;
+  int Changementx = 0;
   
   Ball(int _size)
   {
@@ -21,79 +23,81 @@ class Ball
   
   void movement()
   {
-    spd.x = spd.x + nombreAleatoirex;
-    spd.y = spd.y + nombreAleatoirey;
-    
-    
     ellipse(spd.x, spd.y, size, size);
     
   }
   
   void stayln()
   {
-    if(sens == 1)
+if(sens == 1)
 {
 if(spd.y <= height )
 {
  sens = 1;
-}
- else
-{
-sens = 0;
- pos.y = pos.y-nombreAleatoirey;}
-}
-else
-{
-  if(pos.y == 0)
-{
- sens = 1;
- pos.y = pos.y+nombreAleatoirey;}
+ spd.y = spd.y+nombreAleatoirey;}
  else
  {
  sens = 0;
- pos.y = pos.y-nombreAleatoirey;}
+ spd.y = spd.y-nombreAleatoirey;}
+}
+else
+{
+  if(spd.y == 0)
+{
+ sens = 1;
+ spd.y = spd.y+nombreAleatoirey;}
+ else
+ {
+ sens = 0;
+ spd.y = spd.y-nombreAleatoirey;}
 }
 
 if(sensx == 1)
 {
-if(pos.x <= width)
+if(spd.x <= width)
 {
  sensx = 1;
- pos.x = pos.x+nombreAleatoirex;}
+ spd.x = spd.x+nombreAleatoirex;}
  else
  {
  sensx = 0;
- pos.x = pos.x-nombreAleatoirex;}
+ spd.x = spd.x-nombreAleatoirex;}
 }
 else
 {
-  if(pos.x == 0)
+  if(spd.x == 0)
 {
  sensx = 1;
- pos.x = pos.x+nombreAleatoirex;}
+ spd.x = spd.x+nombreAleatoirex;}
  else
  {
  sensx = 0;
- pos.x = pos.x-nombreAleatoirex;}
+ spd.x = spd.x-nombreAleatoirex;}
 }
-    
-  }
-  
+movement();
+  } 
 }
 
-Ball ball = new Ball(50);
 
+Ball balls[] = new Ball[100];
 
 void setup()
 {
   size(600, 600);
   background(100);
-  ball.display();
+  for (int i =0; i < balls.length; ++i)
+  {
+    balls[i] = new Ball(10);
+  }
 }
 
 void draw()
 {
   background(100);
   fill(0, 0, 255);
-  ball.movement();
+  for (int i = 0; i < balls.length; ++i)
+  {
+  balls[i].stayln();
+  }
+
 }
